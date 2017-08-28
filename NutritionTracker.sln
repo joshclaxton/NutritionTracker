@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionTracker.Functions", "NutritionTracker.Functions\NutritionTracker.Functions.csproj", "{95498592-33F7-4EE7-A25B-F3323ED65E2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutritionTracker.Functions", "NutritionTracker.Functions\NutritionTracker.Functions.csproj", "{95498592-33F7-4EE7-A25B-F3323ED65E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionTracker.Data", "NutritionTracker.Data\NutritionTracker.Data.csproj", "{30491C0F-0337-4836-BADB-0ABD8F4D4652}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutritionTracker.Usda", "NutritionTracker.Usda\NutritionTracker.Usda.csproj", "{CD41DDFD-8CCD-4FB9-ADB7-BDB7FB7D50DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{95498592-33F7-4EE7-A25B-F3323ED65E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95498592-33F7-4EE7-A25B-F3323ED65E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95498592-33F7-4EE7-A25B-F3323ED65E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30491C0F-0337-4836-BADB-0ABD8F4D4652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30491C0F-0337-4836-BADB-0ABD8F4D4652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30491C0F-0337-4836-BADB-0ABD8F4D4652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30491C0F-0337-4836-BADB-0ABD8F4D4652}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD41DDFD-8CCD-4FB9-ADB7-BDB7FB7D50DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD41DDFD-8CCD-4FB9-ADB7-BDB7FB7D50DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD41DDFD-8CCD-4FB9-ADB7-BDB7FB7D50DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD41DDFD-8CCD-4FB9-ADB7-BDB7FB7D50DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
