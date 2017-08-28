@@ -34,7 +34,7 @@ namespace NutritionTracker.Functions
             //restaurantName = restaurantName ?? data?.name;
 
             if (restaurantName == null) {
-                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a restaurant name on the query string");
+                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass restaurantName on the query string");
             }
 
             var restaurantQuery = restaurantMenusTable
@@ -45,17 +45,13 @@ namespace NutritionTracker.Functions
             TableContinuationToken continuationToken = null;
             do
             {
-                // Execute the query async until there is no more result
                 var queryResult = await restaurantQuery.ExecuteSegmentedAsync(continuationToken);
                 restaurantFoodItems.AddRange(queryResult);
 
                 continuationToken = queryResult.ContinuationToken;
             } while (continuationToken != null);
 
-
-            var returnData = JsonConvert.SerializeObject(restaurantFoodItems);
-
-            return req.CreateResponse(HttpStatusCode.OK, restaurantFoodItems,"application/json");
+            return req.CreateResponse(HttpStatusCode.OK, restaurantFoodItems);
         }
 
         public class RestaurantFoodItem : TableEntity
