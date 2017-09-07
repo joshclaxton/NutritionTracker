@@ -7,7 +7,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NutritionTracker.Usda\NutritionTracker.Usda.csproj" />
+    <ProjectReference Include="..\NutritionTracker.Core\NutritionTracker.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

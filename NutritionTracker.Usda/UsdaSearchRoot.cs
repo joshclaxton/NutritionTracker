@@ -39,7 +39,7 @@ namespace NutritionTracker.Usda
     /// <summary>
     /// Meta data for the USDA Search results
     /// </summary>
-    public class UsdaSearchMetaData
+    public class UsdaSearch
     {
         /// <summary>
         /// terms requested and used in the search
@@ -92,12 +92,12 @@ namespace NutritionTracker.Usda
     /// High level container for USDA Search results
     /// https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md
     /// </summary>
-    public class UsdaSearch
+    public class UsdaSearchRoot
     {
         /// <summary>
         /// Meta data for the USDA Search results
         /// </summary>
         [JsonProperty(PropertyName = "list")]
-        public UsdaSearchMetaData MetaData { get; set; }
+        public UsdaSearch UsdaSearch { get; set; }
     }
 }

@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
-using NutritionTracker.Usda;
-using System.Configuration;
-
-
+using NutritionTracker.Core;
 namespace NutritionTracker.Functions
 {
     
@@ -26,24 +23,24 @@ namespace NutritionTracker.Functions
                 .FirstOrDefault(q => string.Compare(q.Key, "restaurantName", true) == 0)
                 .Value;
 
-            if (restaurantName == null) return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass restaurantName on the query string");
+            if (restaurantName == null)
+                return req.CreateResponse(HttpStatusCode.BadRequest, "Please pass restaurantName on the query string");
 
-            var apiKey = System.Environment.GetEnvironmentVariable("UsdaApiKey");
+            var usdaApiKey = System.Environment.GetEnvironmentVariable("UsdaApiKey");
+            
+            //can use HttpClient Overload to mock HttpClient 
+            //http://chimera.labs.oreilly.com/books/1234000001708/ch14.html#_fake_response_handlers
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync("https://api.nal.usda.gov/ndb/V2/reports?ndbno=45183692&ndbno=45183702&type=f&format=json&api_key=RpfS42WSIs4Pmj9jxY1Q18tMYTz1dCVtPJpChNRY");
+                var stringResult = await response.Content.ReadAsStringAsync();
 
-            using (var httpClient = new HttpClient()) {
-                /// TODO Make this mockable for unit testing. HttpClient is NOT mockable like this
-                /// see https://stackoverflow.com/questions/36425008/mocking-httpclient-in-unit-tests#
-                var usdaApiClient = new UsdaAPIClient(httpClient,apiKey);
-                var searchResult = await usdaApiClient.Search(restaurantName);
-                return req.CreateResponse(HttpStatusCode.OK, searchResult);
+                var nutritionTrackerLogic = new NutritionTrackerLogic(httpClient, usdaApiKey);
+                var restaurantMenus = await nutritionTrackerLogic.GetRestaurantMenus(restaurantName);
+                return req.CreateResponse(HttpStatusCode.OK, restaurantMenus);
             }
 
-            //todo lets just use their API to start with. If I get throttled, I can build more infrastructure (hourly job plus azure table)
-            //search by restaurant name https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md
-            //group by manufacturer
-            //call https://ndb.nal.usda.gov/ndb/doc/apilist/API-FOOD-REPORTV2.md for all food items in the search with the MANUFACTURER (50 per request)
-            //perform points calculation
-            //follow rate limits at https://api.data.gov/docs/rate-limits/
+            
         }
     }
 }
